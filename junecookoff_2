@@ -1,0 +1,45 @@
+from bisect import bisect_right
+tot=int(input())
+for i in range(tot):
+    N,M=list(map(int,input().split()))
+    array=list(map(int,input().split()))
+    array=sorted(array)
+    pos=bisect_right(array,M)
+    if pos==0:
+        print(N)
+    elif(pos<len(array) and array[pos-1]==M-1):
+        minlen=len(array)-(pos-1)
+        front=array[pos-1]
+        back=array[pos-2]
+        for i in range(pos-2,-1,-1):
+            if((front-back)>1):
+               break
+            minlen+=1
+            front=back
+            if(i!=0):
+                back=array[i-1]
+        print(minlen)
+    elif(pos<len(array) and array[pos-1]==M and array[0]!=M):
+        check=pos-1
+        while True:
+            if(array[check]!=M):
+               break
+            check-=1
+        if(array[check]==M-1):
+            minlen=len(array)-pos+1
+            front=array[check]
+            back=array[check-1]
+            for i in range(check-1,-1,-1):
+                if((front-back)>1):
+                   break
+                minlen+=1
+                front=back
+                if(i!=0):
+                    back=array[i-1]
+            print(minlen)
+        else:
+            print(-1)
+            
+    else:
+        print(-1)
+            
