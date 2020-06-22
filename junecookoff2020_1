@@ -1,0 +1,14 @@
+from math import floor,ceil
+tot=int(input())
+for i in range(tot):
+    prev=-1
+    N,B,M=map(int,input().split())
+    tot_boxes=ceil(N/B)
+    array=map(int,input().split())
+    no_of_loads=0
+    for i in array:
+        current_box=floor(i/B)
+        if(current_box!=prev):
+            no_of_loads+=1
+            prev=current_box
+    print(no_of_loads)
